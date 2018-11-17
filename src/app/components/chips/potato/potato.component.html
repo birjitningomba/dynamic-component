@@ -1,0 +1,52 @@
+
+<form class="example-form" [formGroup]="potatoFormGroup" novalidate>
+
+    <div>
+	<div *ngIf="editing">
+		<mat-form-field class="example-full-width">
+			<input matInput required
+      formControlName="chipName"
+      placeholder="Name" (focusout)="prepareChipData()">
+		</mat-form-field>
+    <mat-form-field class="example-full-width">
+  <input type="text" placeholder="Flavour" (focusout)="prepareChipData()" matInput formControlName="chipFlavour" [matAutocomplete]="auto">
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let flavour of flavours" [value]="flavour">{{flavour}}</mat-option>
+</mat-autocomplete>
+
+	</div>
+ 
+	<div *ngIf="!editing">
+     <div class="controls">
+   <span>
+    <button (click)="Move(-1)"> &#8679;</button>
+    <button (click)="Move(1)"  > &#8681;</button></span>
+   </div> 
+   
+		<mat-card class="sample-chips" cdkDrag>
+			<mat-card-title>{{chipData.chipName}} </mat-card-title>
+			<mat-card-content> <b>{{chipData.chipFlavour}}</b> </mat-card-content>
+
+		</mat-card>
+
+   </div>
+ 
+  </div>
+
+  <mat-error *ngIf="chipName.invalid && chipName.touched" class="has-text-danger">
+          <small> The chip name is required! </small>
+  </mat-error>
+    <mat-error *ngIf="chipFlavour.hasError('required') && chipFlavour.touched" class="has-text-danger">
+          <small> The chip flavour is required! </small>
+  </mat-error>
+  
+  <mat-error *ngIf="chipFlavour.hasError('validFlavour')  && !chipFlavour.hasError('required')" class="has-text-danger">
+          <small> The chip flavour is invalid! </small>
+  </mat-error> 
+
+
+   <!-- {{chipFlavour.errors | json}} -->
+
+</form>

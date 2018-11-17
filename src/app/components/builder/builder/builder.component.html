@@ -1,0 +1,25 @@
+
+  <ng-template #containerEditing></ng-template>
+<!-- <mat-form-field>
+	<mat-select placeholder="Select Chip" 
+  [(ngModel)]="selectedChip" name="selectedItem" 
+  [(value)]="selectedChipComponent" (change)="Load()">
+		<mat-option value="Select">Select Chip</mat-option>
+		<mat-option value="Potato">Potato Chip</mat-option>
+	</mat-select>
+</mat-form-field> -->
+<hr/>
+<span>
+  <button mat-raised-button color="accent" (click)="Load()">Load</button>
+</span>
+<span>
+  <button mat-raised-button color="accent" type="submit" (click)="Add()">Add</button>
+</span>
+<hr/>
+<div (cdkDropListDropped)="drop($event)" class="example-list"  cdkDropList>
+    <ng-template   #container  ></ng-template>
+
+</div>
+
+
+
